@@ -24,6 +24,8 @@ class ApplianceCostSensor(FplMoneyEntity):
     @property
     def native_value(self):
         appliance_usage = self.getData("appliance_usage")
+        if appliance_usage is None:
+             return None
         categories = appliance_usage.get("categories")
         for category in categories:
             if category.get("category").lower() == self.CATEGORY_NAME.lower():
